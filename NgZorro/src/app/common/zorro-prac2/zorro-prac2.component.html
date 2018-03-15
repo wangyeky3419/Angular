@@ -61,7 +61,7 @@
         <p style="background:red">全局提示包不知道在哪引</p>
     </div>
     <div nz-col [nzSpan]="8">
-        <!-- modal top -->
+    <!-- modal top -->
         <button nz-button [nzType]="'info'" (click)="success()">
             <span>成功提示</span>
         </button>
@@ -74,6 +74,23 @@
         </button>
         <!-- 使用Component end -->
 
-        <!-- modal end -->
+    <!-- modal end -->
+    <!-- 通知提醒框 top -->
+        <p style="margin:10px 0;"></p>
+        <button nz-button (click)="createNotification('success')">成 功</button>
+        <button nz-button (click)="createNotification('info')">消 息</button>
+        <button nz-button (click)="createNotification('warning')">警 告</button>
+        <button nz-button (click)="createNotification('error')">错 误</button>
+        <br>
+    <!-- 通知提醒框 end -->
+    <!-- 起泡确认 top -->
+        <nz-popconfirm [nzTitle]="'Are you sure？'" 
+                       [nzOkText]="'确认'" 
+                       [nzCancelText]="'取消'" 
+                       (nzOnConfirm)="confirm()" 
+                       (nzOnCancel)="cancel()">
+            <a nz-popconfirm>删除</a>
+        </nz-popconfirm>
+    <!-- 起泡确认 end -->
     </div>
 </div>

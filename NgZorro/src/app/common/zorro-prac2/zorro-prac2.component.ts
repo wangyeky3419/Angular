@@ -1,15 +1,16 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NzInputDirectiveComponent } from '../../../components/input/nz-input.directive.component';
-import { NzModalService, NzModalSubject  } from 'ng-zorro-antd';
+import { NzModalService, NzModalSubject, NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 //引入外部modal组件
 import { NzModalComponent } from './nz-modal.component';
+
 @Component({
     selector: 'app-zorro-prac2',
     templateUrl: './zorro-prac2.component.html',
     styleUrls: ['./zorro-prac2.component.css']
 })
 export class ZorroPrac2Component implements OnInit {
-    //==== Tag标签 top====
+//==== Tag标签 top====
     public tags = ['Unremovable', 'Tag 2', 'Tag 3'];
     public inputVisible = false;
     public inputValue = '';
@@ -50,14 +51,14 @@ export class ZorroPrac2Component implements OnInit {
             event.preventDefault();
         }
     }
-    //==== Tag标签 end====
-    //==== Alert警告提示 top====
+//==== Tag标签 end====
+//==== Alert警告提示 top====
     afterClose() {
         console.log('close');
     }
-    //==== Alert警告提示 end====
+//==== Alert警告提示 end====
 
-    //==== modal top====
+//==== modal top====
     success() {
         this.confirmServ.success({
             title: '这是一条成功信息',
@@ -98,9 +99,26 @@ export class ZorroPrac2Component implements OnInit {
             console.log('状态',result);
         })
     }
-    //==== modal end====
-    
-    constructor(private confirmServ: NzModalService) {
+//==== modal end====
+//==== 通知提醒框 top====
+    createNotification = (type) => {
+        this._notification.create(type, '这是标题', '这是提示框的文案这是提示框示框的文案这是提示是提示框的文案这是提示框的文案');
+    };
+//==== 通知提醒框 end====
+//==== 起泡确认 top====
+    cancel = function () {
+        this.message.info('点击取消');
+    };
+
+    confirm = () => {
+        this.message.info('点击确认')
+    };
+//==== 起泡确认 end====
+    constructor(
+        private confirmServ: NzModalService,
+        private _notification: NzNotificationService,
+        private message: NzMessageService) {
+
     }
 
     ngOnInit() {

@@ -1,0 +1,28 @@
+<h3>我的英雄</h3>
+<ul class="heroes">
+	<li *ngFor="let hero of heroes" 
+	(click)="onSelect(hero)"
+	[class.selected]="hero === selectedHero">
+		<!--点击事件，调用AppComponent的onSelect()方法，并把模板输入变量hero作为参数传进去-->
+		<!-- 当表达式(hero === selectedHero)为true时，Angular会添加一个CSS类selected。为false时则会移除selected类。-->
+		<!-- 遍历后的英雄放在这 (模板)-->
+		<!-- ngFor的*前缀表示<li>及其子元素组成了一个主控模板。-->
+		<!-- 引号中赋值给ngFor的那段文本表示“从heroes数组中取出每个英雄，存入一个局部的hero变量，并让它在相应的模板实例中可用”-->
+		<span class="badge">{{hero.id}}</span>{{hero.name}}
+	</li>
+</ul>
+<div>
+	<h2>
+		{{selectedHero.name | uppercase}} is my hero
+	</h2>
+	<button (click)="gotoDetail()">英雄详情</button>
+</div>
+  			<!--[(ngModel)]是一个Angular语法，用与把hero.name绑定到输入框中。 它的数据流是双向的：从属性到输入框，并且从输入框回到属性(需要引包)
+  					改变input里面的值，就会改变hero.name  h2标签也会跟着改变
+  					ngModel指令将这些修改传播到每一个对hero.name的其它绑定*/
+
+  					/*父组件AppComponent会告诉子组件HeroDetailComponent要显示哪个英雄， 
+  					告诉的方法是把父组件的selectedHero属性绑定到HeroDetailComponent
+  					的hero属性上。 这种绑定是这样的：在等号的左边，是方括号围绕的hero属性，
+  					这表示它是属性绑定表达式的目标。 我们要绑定到的目标属性必
+  					须是一个输入属性，否则Angular会拒绝绑定，并抛出一个错误。-->

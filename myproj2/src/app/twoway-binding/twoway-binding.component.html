@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">双向绑定</div>
+  	<div class="panel-body">
+    	<button class="btn btn-success" (click)="twowayBind($event)">点击</button>
+    	<font-resizer [(size)]="fontSize"></font-resizer>
+    	<!--双向绑定，子组件里的size改变影响父组件里的fontSize改变，然后影响到这里的“字体大小”几个字的显示
+    				  父组件默认的16px值也赋给了子组件-->
+    	<div [style.font-size.px]="fontSize">字体大小</div>
+    	<!--[style.font-size.px]值绑定到-fontSizePx上，父组件里面的属性-->
+  	</div>
+</div>

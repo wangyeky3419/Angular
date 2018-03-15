@@ -1,0 +1,56 @@
+1.npm install -g n --force
+win下安装n模块（用来升级node的）
+2.安装完的node运行时提示  无法加载或初始化请求的服务提供程序   解决办法是输入netsh winsock reset命令行（这个命令是重置网络相关东西的，慎用），
+3.angulagr cli脚手架安装完后，ng -v 提示不是内部命令，猜测肯定是内部的环境变量问题，输入  where ng
+可以看到angulagr cli安装目录，在这里能启动，说明安装没问题，把目录放到环境变量的path里面，就可以了
+4.一直报错《import { Component Input} from '@angular/core';
+》找了好久才发现引组件的时候import { Component, Input} 里面要用  , 分隔
+5.报错《Cannot find module “angular-in-memory-web-api”》缺少一个依赖模块，找到自己项目根目录下的package.json文件，定位到dependencies，为其添加一行代码：“angular-in-memory-web-api”: “^0.3.2”,执行npm install即可,注意dependencies数组追后的的一定不要加逗号，不然npm install报错
+6.报错《Can't bind to 'formControl' since it isn't a known property of 'input'》可能原因是app.module.ts文件里面缺少一些组件的引用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+前端页面
+
+报文测试页面：
+一、新增
+	1.断言（函数类型，函数名称，函数参数）
+	2.使用SQL功能
+	3.编辑SQL表单
+	
+
+二、修改
+	1.断言处对 函数类型 进行过滤，显示成文字增加可读性
+	2.断言处对 函数参数 进行textarea和text间切换
+	3.字段值，使用sql时显示下拉，未使用sql显示输入框
+	4
+
+
+
+交易报文配置页面：
+编辑模板/修改模板页面对   解析规则名称显示进行过滤
+
+报文测试页面：
+对断言处函数类型进行汉化

@@ -1,0 +1,10 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">父组件</div>
+  	<div class="panel-body">
+  		<input [(ngModel)]="userName">
+  		<!--数据双向绑定到userName上-->
+  		<input [(ngModel)]="userObject.name">
+  		<child111 #child11 [userName1]="userName" [userObject1]="userObject"></child111>
+  		<p>父组件里获得子组件的值为：{{exitVal}}</p>
+  	</div>
+</div>

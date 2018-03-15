@@ -1,0 +1,8 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">子组件-childFour，想用第四个组件操作第五个投影进来的组件，（演示ContentChild装饰器）</div>
+  	<div class="panel-body">
+  		<ng-content select="child-five"></ng-content><!--选择器，选择child-five投影到这里-->
+  		<p>{{this.childFive.title}}</p>
+  		<button class="btn btn-success" (click)="test2()">调用组件5方法</button>
+  	</div>
+</div>

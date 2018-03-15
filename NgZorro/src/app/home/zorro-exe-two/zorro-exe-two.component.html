@@ -1,0 +1,62 @@
+<div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="8">
+        <!-- 走马灯 top -->
+        <nz-carousel 
+            (nzAfterChange)="nzAfterChange()" 
+            (nzBeforeChange)="nzBeforeChange()"
+            (nzSlickNext)="nzSlickNext()"
+        >
+            <div nz-carousel-content *ngFor="let index of array" >
+                <h3>{{index}}</h3>
+            </div>
+        </nz-carousel>
+        <p>以下方法没弄明白</p>
+        <p>1. nzSlickNext 切换到下一个面板</p>
+        <p>2. nzSlickPrev 切换到上一个面板</p>
+        <p>3. nzSlickGoTo 切换到指定索引面板</p>
+        <!-- 走马灯 end -->
+    </div>
+    <div nz-col [nzSpan]="8">
+        <!-- 折叠面板 top -->
+        <nz-collapseset [nzAccordion]="true">
+            <nz-collapse *ngFor="let panel of panels" [nzTitle]="panel.name" [nzActive]="panel.active">
+                <p>{{panel.name}} 的内容</p>
+                <!-- 嵌套部分 top -->
+                <div *ngIf="panel.childPanel&&panel.childPanel.length>0">
+                    <nz-collapseset>
+                        <nz-collapse *ngFor="let childPanel of panel.childPanel" [nzTitle]="childPanel.name"
+                                    [nzActive]="childPanel.active">
+                        <p>{{childPanel.name}} 的内容</p>
+                        </nz-collapse>
+                    </nz-collapseset>
+                </div>
+                <!-- 嵌套部分 end -->
+            </nz-collapse>
+        </nz-collapseset>
+        <!-- 折叠面板 end -->
+        <!-- 起泡卡片 top -->
+        <nz-popover [nzTitle]="'标题'" [(nzVisible)]="visible" (nzVisibleChange)="nzVisibleChange($event)" [nzTrigger]="'click'">
+            <button nz-button nz-popover>点击</button>
+            <ng-template #nzTemplate>
+                <a (click)='clickMe()'>点击关闭</a>
+                <p>内容</p>
+                <p>内容</p>
+            </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'标题'" [nzTrigger]="'hover'">
+            <button nz-button nz-popover>移入</button>
+            <ng-template #nzTemplate>
+                <div><p>内容</p>
+                <p>内容</p></div>
+            </ng-template>
+        </nz-popover>
+        <nz-popover [nzTitle]="'标题'" [nzTrigger]="'focus'">
+            <button nz-button nz-popover>聚焦</button>
+            <ng-template #nzTemplate>
+                <div><p>内容</p>
+                <p>内容</p></div>
+            </ng-template>
+        </nz-popover>
+        <!-- 起泡卡片 end -->
+    </div>
+</div>

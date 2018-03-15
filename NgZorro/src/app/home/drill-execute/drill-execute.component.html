@@ -1,0 +1,54 @@
+<nz-tabset>
+    <nz-tab>
+        <ng-template #nzTabHeading>
+            name1
+        </ng-template>
+        <div nz-row [nzGutter]="8">
+            <div nz-col [nzSpan]="6">
+                <app-execute-child1>
+                        <app-execute-child2></app-execute-child2>
+                </app-execute-child1> 
+            </div>
+            <div nz-col [nzSpan]="6">
+                <app-info></app-info>
+            </div>
+            <div nz-col [nzSpan]="12">
+                <!-- 这里的 childTitle 实际上是调用子组件里面发 set 方法，把父组件的属性值赋值给子组件-->
+                <app-zorro-practice 
+                        #zorroPractice childTitle={{textValue}} 
+                        inputValue={{inp.value}} 
+                        [(count)]="fatherCount"
+                        (follow)="fatherFn(zorroPractice.childText)">
+                </app-zorro-practice>
+                <br>
+                <button nz-button [nzType]="'primary'" (click)="zorroPractice.setValue2(inp2.value)">7，父页面输入值传递到子组件</button>
+                <input type="text" #inp2><br><br>
+
+                <!-- 获取子组件里面的tags属性的值 -->
+                <button nz-button [nzType]="'primary'" (click)="setValue(zorroPractice.tags)">8，直接获取子组件属性值</button>
+                <!-- 1.子组件属性值===>父组件页面 -->
+                <input type="text" value="父组件页面input输入值" #inp>
+                <input type="text" [(ngModel)]="textValue">
+                <!-- 2.子组件属性值===>父组件里面 -->
+                <div style="border:1px solid #000;margin:10px 0;"></div>
+                <div>
+                    <p>1.子组件属性值===>父组件页面</p><br>
+                    <p>子组件属性值：<mark>{{zorroPractice._childTitle2}}</mark></p><br>
+                    <p>子组件页面值==>子组件==>父组件</p>
+                </div>
+            </div>
+        </div>
+    </nz-tab>
+    <nz-tab>
+        <ng-template #nzTabHeading>
+            name2
+        </ng-template>
+        <app-zorro-prac2></app-zorro-prac2>
+    </nz-tab>
+    <nz-tab>
+        <ng-template #nzTabHeading>
+            name3
+        </ng-template>
+        <span>content3</span>
+    </nz-tab>
+</nz-tabset>

@@ -1,0 +1,25 @@
+<div nz-row>
+    <div nz-col [nzSpan]="4">
+        <!-- 头像 top -->
+        <nz-avatar [nzText]="text" nzSize="large" [ngStyle]="{'background-color':color}"></nz-avatar>
+        <button nz-button [nzType]="'dashed'" (click)="change()">
+            <span>Change</span>
+        </button>
+        <br>
+        <p>徽标数</p>
+        <!-- 头像 end -->
+    </div>
+    <div nz-col [nzSpan]="20">
+        <!-- 日历 top -->
+        <nz-calendar #datt [nzLocale]="'zh-cn'" (click)="haveValue(day)">
+            <ng-template #dateCell let-day>
+                <nz-badge [nzStatus]="'success'" [nzText]="'Sunday'" *ngIf="haveValue(day.date|date:'EEE')" ></nz-badge>
+                <nz-badge [nzStatus]="'processing'" [nzText]="'Saturday'" *ngIf="(day.date|date:'EEE')==='Sat'"></nz-badge>
+            </ng-template>
+            <ng-template #monthCell let-month>
+                <nz-badge [nzStatus]="'success'" [nzText]="'This Month is Sep'" *ngIf="month.index==11"></nz-badge>
+            </ng-template>
+        </nz-calendar>
+        <!-- 日历 end -->
+    </div>
+</div>

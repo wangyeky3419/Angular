@@ -1,0 +1,32 @@
+:host ::ng-deep .avatar-uploader,
+  :host ::ng-deep .avatar-uploader-trigger,
+  :host ::ng-deep .avatar {
+    width: 150px;
+    height: 150px;
+    display: block;
+}
+
+:host ::ng-deep .avatar-uploader {
+  display: block;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+:host ::ng-deep .avatar-uploader-trigger {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 28px;
+  color: #999;
+}
+/* 照片墙样式 */
+/* :host ::ng-deep i {
+    font-size: 32px;
+    color: #999;
+  }
+  :host ::ng-deep .ant-upload-text {
+    margin-top: 8px;
+    color: #666;
+  } */
+  :host ::ng-deep nz-upload { display: block; }
+  :host ::ng-deep .ant-upload.ant-upload-drag { height: 180px; }

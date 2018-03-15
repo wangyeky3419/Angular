@@ -1,0 +1,15 @@
+<p>
+  这里是段子,利用路由守卫防止用户输入的内容不丢失
+</p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <div class="col-xs-12">
+      <input type="text" class="form-control" placeholder="写一个段子吧！" [value]="jokeContent" (change)="writeJoke($event.target.value)" name="jokeContent">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <button type="button" class="btn btn-success" (click)="saveContent()">提交</button>
+    </div>
+  </div>
+</form>

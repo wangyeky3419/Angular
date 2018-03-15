@@ -1,0 +1,8 @@
+<div class="panel panel-primary" [@flyIn]=state>
+	<div class="panel-heading">child2</div>
+  	<div class="panel-body">
+  		<p>顺便测试一下动效</p>
+  		<p *ngFor="let event of events">{{event}}</p>
+  		<button (click)="toggle()" class="btn btn-success">点击</button>
+  	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">NgContent内容投影《详解》（父组件）</div>
+  	<div class="panel-body">
+  		<child-two>
+  			<h3>这是父组件投影到子组件里面的内容1</h3>
+  			<p class="p1">这是底部</p>
+  			<!--这种写法叫做内容投影，这么写后就会把h3里面的内容投影到子组件了，将子组件里面的ng-content标签替换掉-->
+  			<child-three (say)="doSomething($event)"></child-three><!--three组件派发一个事件-->
+  		</child-two>
+  	</div>
+</div>

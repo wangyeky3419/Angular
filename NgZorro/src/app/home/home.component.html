@@ -1,0 +1,49 @@
+<div class="div1111d">
+    <nz-layout class="home_layout">
+        <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed">
+            <div [ngClass]=" isCollapsed?'logo':'largeLogo' "> 
+                <i class="anticon anticon-home"></i>
+                <span *ngIf="!isCollapsed">演练平台</span>           
+            </div>
+            <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+                <li nz-menu-item  routerLink="setMsg"><span><i class="anticon anticon-tool"></i><span class="nav-text">设置演练信息</span></span></li>
+                <li nz-submenu>
+                    <span title><i class="anticon anticon-appstore-o"></i><span class="nav-text">交易范围定义</span></span>
+                    <ul>
+                        <li nz-menu-item routerLink="institutes">演练机构定义</li>
+                        <li nz-menu-item routerLink="tellers">演练柜员定义</li>
+                        <li nz-menu-item routerLink="tellersNo">演练柜员不参演交易码定义</li>
+                    </ul>
+                </li>
+                <li nz-submenu>
+                    <span title><i class="anticon anticon-bar-chart"></i><span class="nav-text">报表展示</span></span>
+                    <ul>
+                        <li nz-menu-item routerLink="institutesReport">机构汇总明细</li>
+                        <li nz-menu-item routerLink="zerroexe">ZERRO练习</li>
+                        <li nz-menu-item routerLink="zerroexe-two">ZERRO练习2</li>
+                    </ul>
+                    
+                </li>
+                <li nz-submenu>
+                    <span title><i class="anticon anticon-contacts"></i><span class="nav-text">手动演练交易操作</span></span>
+                    <ul>
+                        <li nz-menu-item routerLink="execute">演练操作主界面</li>
+                    </ul>
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-layout>
+            <nz-header style="background: #fff; padding:0;"></nz-header>
+            <nz-content style="margin:0 16px;">
+                <nz-breadcrumb style="margin:12px 0;">
+                <nz-breadcrumb-item>User</nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+                </nz-breadcrumb>
+                <div style="padding:24px; background: #fff; min-height: 460px;">
+                    <router-outlet></router-outlet>
+                </div>
+            </nz-content>
+            <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+        </nz-layout>
+    </nz-layout>
+</div>

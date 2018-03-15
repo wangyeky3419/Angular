@@ -1,0 +1,8 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">模板内局部变量</div>
+  	<div class="panel-body">
+    	<input #heroInput><!--这个相当于给input命了一个名，只能在模板本身可见，在类（.ts）中是不可见的，-->
+    	<p>{{heroInput.value}}</p>
+    	<button class="btn btn-success" (click)="sayHello(heroInput.value)">点击</button><!--利用这个模板的局部变量进行传值-->
+  	</div>
+</div>

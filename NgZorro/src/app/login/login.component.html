@@ -1,0 +1,36 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="_submitForm()" role="form">
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input formControlName="userName" id="userName" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
+                <ng-template #prefix>
+                    <i class="anticon anticon-user"></i>
+                </ng-template>
+            </nz-input>
+        <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">请输入用户名!</div>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <nz-input formControlName="password" id="password" [nzType]="'password'" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+                <ng-template #prefix>
+                    <i class="anticon anticon-lock"></i>
+                </ng-template>
+            </nz-input>
+            <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请输入密码!</div>
+            <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('minlength')">至少五个字符</div>
+        </div>
+    </div>
+    <div nz-form-item>
+        <div nz-form-control>
+            <label nz-checkbox formControlName="remember">
+                <span>记住我</span>
+            </label>
+            <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+            <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" [nzLoading]="loading">登录</button>
+        </div>
+    </div>
+    <div nz-form-item>
+        <button nz-button class="login-form-button" (click)="fastLogin()" [nzType]="'primary'" [nzSize]="'large'" [nzLoading]="loading">快速登录</button>
+    </div>
+</form>
+

@@ -1,0 +1,79 @@
+<div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="8">
+        <!-- Tag 标签 top -->
+        <nz-tag *ngFor="let tag of tags; let i = index;"
+            [nzClosable]="i !== 0"
+            [nzColor]="'orange'"
+            (nzClose)="handleClose(tag)"
+            (nzBeforeClose)="nzBeforeClose($event)">
+            {{sliceTagName(tag)}}
+        </nz-tag>
+        <button nz-button *ngIf="!inputVisible"
+            [nzSize]="'small'" [nzType]="'dashed'"
+            (click)="showInput()">+ New Tag
+        </button>
+        <input nz-input #input
+                *ngIf="inputVisible" type="text"
+                [(ngModel)]="inputValue"
+                style="width: 78px;"
+                (blur)="handleInputConfirm()" 
+                (keydown.enter)="handleInputConfirm()">
+        
+        <!-- Tag 标签 end -->
+        <!-- 时间轴 top -->
+        <p style="margin:20px 0;"></p>
+        <nz-timeline>
+            <nz-timeline-item>记录2015-09-01</nz-timeline-item>
+            <nz-timeline-item [nzColor]="'green'">记录2015-09-02</nz-timeline-item>
+            <nz-timeline-item [nzColor]="'red'">
+                <ng-template #custom>
+                    <i class="anticon anticon-clock-circle-o" style="font-size: 16px;"></i>
+                </ng-template>
+                记录2015-09-03
+            </nz-timeline-item>
+            <nz-timeline-item>记录2015-09-04</nz-timeline-item>
+            <ng-template #pending>
+                <a>敬请期待</a>
+            </ng-template>
+        </nz-timeline>
+        <!-- 时间轴 end -->
+    </div>
+    <div nz-col [nzSpan]="8">
+        <!-- Alert 警告提示 top -->
+        <nz-alert [nzType]="'warning'" 
+                  nzCloseable 
+                  [nzMessage]="'警告提示'" 
+                  (nzOnClose)="afterClose()">
+        </nz-alert>
+        <nz-alert [nzType]="'error'" 
+                  nzCloseable 
+                  [nzMessage]="'错误提示'"
+                  [nzDescription]="'错误描述'"
+                  (nzOnClose)="afterClose()">
+        </nz-alert>
+        <nz-alert [nzType]="'success'"
+                  nzCloseable 
+                  [nzMessage]="'Success Tips'"
+                  [nzDescription]="'Detailed description '"
+                  nzShowIcon>
+        </nz-alert>
+        <!-- Alert 警告提示 end -->
+        <p style="background:red">全局提示包不知道在哪引</p>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <!-- modal top -->
+        <button nz-button [nzType]="'info'" (click)="success()">
+            <span>成功提示</span>
+        </button>
+        <button nz-button [nzType]="'info'" (click)="showConfirm()">
+            <span>确认对话框</span>
+        </button>
+        <!-- 使用Component top -->
+        <button nz-button [nzType]="'primary'" (click)="showModalForComponent()">
+            <span>使用Component</span>
+        </button>
+        <!-- 使用Component end -->
+
+        <!-- modal end -->
+    </div>
+</div>

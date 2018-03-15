@@ -1,0 +1,10 @@
+<div *ngIf="hero"><!--当selectedHero为假时里面的详情不显示-->
+	<h2>{{hero.name}} 详细信息!</h2>
+	<div><label>id:</label>{{hero.id}}</div>
+	<div>
+		<label>name:</label>
+		<input [(ngModel)]="hero.name" placeholder="name">
+	</div>
+	<button (click)="goBack()">返回</button>
+</div>
+

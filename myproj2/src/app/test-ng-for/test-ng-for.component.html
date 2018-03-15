@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">NgFor用法</div>
+  	<div class="panel-body">
+    	请选择种族
+    	<ul>
+    		<li *ngFor="let race of races;let i=index;">
+    			{{i+1}}---{{race.name}}
+    		</li>
+    	</ul>
+  	</div>
+</div>

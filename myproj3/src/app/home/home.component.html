@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-xs-3">
+		<div class="list-group">
+			<a href="javascript:;" class="list-group-item active">
+		  		二级菜单
+		  	</a>
+		  	<a routerLink="pictures" class="list-group-item">
+		    	图片
+		  	</a>
+		  	<a routerLink="text" class="list-group-item">
+		  		文字
+		  	</a>
+		</div>
+		<button class="btn btn-success" (click)="manualNav()">手动导航，调用router,导航到home2</button>
+	</div>
+	<div class="col-xs-9">
+		<router-outlet></router-outlet>
+	</div>
+</div>

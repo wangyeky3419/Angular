@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">单向值绑定</div>
+  	<div class="panel-body">
+    	<img [src]="imgSrc"><!--[]这种写法说明是值绑定,src绑定上了imgSrc属性的值-->
+    	<button class="btn btn-success" (click)="changeSrc()">修改图片</button><!--每次点击改变img标签的src属性-->
+  	</div>
+</div>
+
+
+
+

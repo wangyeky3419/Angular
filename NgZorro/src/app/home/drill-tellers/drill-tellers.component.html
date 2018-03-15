@@ -1,0 +1,80 @@
+<div nz-row>
+    <div nz-col [nzSpan]="8">
+        <!-- 文件上传1 top -->
+        <nz-upload
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            [nzFileList]="fileList"
+            nzMultiple
+            [nzLimit]="2"
+            (nzChange)="handleChange($event)"
+            [nzBeforeUpload]="beforeUpload"
+            [nzRemove]="nzRemove">
+            <button nz-button>
+            <i class="anticon anticon-upload"></i><span>上传文件</span>
+            </button>
+        </nz-upload>
+        <p>.jpg，.xls等上传不了，不清楚</p>
+        <!-- 文件上传1 end -->
+        <br>
+        <!-- 图片上传1 top -->
+        <nz-upload
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            nzListType="picture"
+            [(nzFileList)]="fileList1">
+            <button nz-button>
+                <i class="anticon anticon-upload"></i><span>上传图片</span>
+            </button>
+        </nz-upload>
+        <!-- 图片上传2 end -->
+        <p>手动上传只需控制nzBeforeUpload,让他返回false,然后统一上传</p>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <!-- 用户头像 end -->
+        <nz-upload class="avatar-uploader"
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            nzName="avatar"
+            [nzShowUploadList]="false"
+            [nzBeforeUpload]="beforeUpload"
+            (nzChange)="handleChange2($event)">
+            <i *ngIf="!avatarUrl" class="anticon anticon-plus avatar-uploader-trigger"></i>
+            <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+        </nz-upload>
+        <!-- 用户头像 end -->
+        <!-- 照片墙 top -->
+        <p>照片墙样式与其他样式冲突，没写</p>
+        <nz-upload
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            nzListType="picture-card"
+            [(nzFileList)]="fileList2"
+            [nzShowButton]="fileList.length < 3"
+            [nzPreview]="handlePreview">
+                <i class="anticon anticon-plus"></i>
+                <div class="ant-upload-text">上传</div>
+        </nz-upload>
+        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+            <ng-template #modalContent>
+                <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+            </ng-template>
+        </nz-modal>
+        <!-- 照片墙 end -->
+    </div>
+    <div nz-col [nzSpan]="8">
+        <!-- 拖拽 top -->
+        <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            [nzLimit]="2"
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            (nzChange)="handleChange3($event)">
+            <p class="ant-upload-drag-icon">
+            <i class="anticon anticon-inbox"></i>
+            </p>
+            <p class="ant-upload-text">点击或拖拽文件到这里上传</p>
+            <p class="ant-upload-hint">点吧点吧点吧点吧点吧点吧点吧点吧</p>
+        </nz-upload>
+        <!-- 拖拽 end -->
+    </div>
+    <div style="color:red">
+        <app-info></app-info>
+    </div> 
+</div>

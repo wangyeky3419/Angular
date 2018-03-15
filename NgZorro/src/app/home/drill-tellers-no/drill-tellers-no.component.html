@@ -1,0 +1,242 @@
+<p>
+    进度条
+</p>
+<br>
+<nz-steps [(nzCurrent)]="current" [nzSize]="'small'">
+    <nz-step [nzTitle]="'注册'"></nz-step>
+    <nz-step [nzTitle]="'填写信息'">
+    </nz-step>
+    <nz-step [nzTitle]="'完成'"></nz-step>
+</nz-steps>
+<div class="steps-content">
+    <div nz-row *ngIf="index==0">
+        <div nz-col [nzSpan]="12" [nzOffset]="'6'">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="_submitForm(regForm.value)" #regForm="ngForm">
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="email" nz-form-item-required>邮箱</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <nz-input [nzSize]="'large'" formControlName="email" [nzId]="'email'"></nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('email').dirty&&getFormControl('email').hasError('email')">邮箱格式不正确!</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="password" nz-form-item-required>密码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <nz-input [nzSize]="'large'" formControlName="password" [nzType]="'password'" [nzId]="'password'" (ngModelChange)="updateConfirmValidator()"></nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('password').dirty&&getFormControl('password').hasError('required')">Please input your password!</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="checkPassword" nz-form-item-required>确认密码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <nz-input [nzSize]="'large'" formControlName="checkPassword" [nzType]="'password'" [nzId]="'checkPassword'"></nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('required')">Please confirm your password!</div>
+                    <div nz-form-explain *ngIf="getFormControl('checkPassword').dirty&&getFormControl('checkPassword').hasError('confirm')">Two passwords that you enter is inconsistent!</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="nickname" nz-form-item-required>
+                    <span>
+                        昵称
+                        <nz-tooltip [nzTitle]="'您的显示名称'">
+                        <i nz-tooltip class="anticon anticon-question-circle-o"></i>
+                        </nz-tooltip>
+                    </span>
+                    </label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+                    <nz-input [nzSize]="'large'" formControlName="nickname" [nzId]="'nickname'"></nz-input>
+                    <div nz-form-explain *ngIf="getFormControl('nickname').dirty&&getFormControl('nickname').hasError('required')">Please input your nickname!</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="phoneNumber" nz-form-item-required>电话号码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback [nzValidateStatus]="validateForm.controls['phoneNumber']">
+                    <nz-input-group [nzSize]="'large'" nzCompact>
+                    <nz-select formControlName="phoneNumberPrefix" style="width: 25%;">
+                        <nz-option [nzLabel]="'+86'" [nzValue]="'+86'"></nz-option>
+                        <nz-option [nzLabel]="'+87'" [nzValue]="'+87'"></nz-option>
+                    </nz-select>
+                    <input formControlName="phoneNumber" id="'phoneNumber'" nz-input style="width: 75%;">
+                    </nz-input-group>
+                    <div nz-form-explain *ngIf="getFormControl('phoneNumber').dirty&&getFormControl('phoneNumber').hasError('required')">请输入电话号码</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row>
+                <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+                    <label for="captcha" nz-form-item-required>验证码</label>
+                </div>
+                <div nz-form-control nz-col [nzSm]="14" [nzXs]="24">
+                    <div nz-row [nzGutter]="8">
+                    <div nz-col [nzSpan]="12">
+                        <nz-input [nzSize]="'large'" formControlName="captcha" [nzId]="'captcha'"></nz-input>
+                    </div>
+                    <div nz-col [nzSpan]="12">
+                        <button nz-button [nzSize]="'large'" (click)="getCaptcha($event)">获取验证码</button>
+                    </div>
+                    </div>
+                    <div nz-form-extra>We must make sure that your are a human.</div>
+                    <div nz-form-explain *ngIf="getFormControl('captcha').dirty&&getFormControl('captcha').hasError('required')">Please input the captcha you got!</div>
+                </div>
+                </div>
+                <div nz-form-item nz-row style="margin-bottom:8px;">
+                <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
+                    <label nz-checkbox formControlName="agree">
+                    <span>我同意 <a>协议条款</a></span>
+                    </label>
+                </div>
+                </div>
+                <div nz-form-item nz-row style="margin-bottom:8px;">
+                <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
+                    <button nz-button [nzSize]="'large'" [nzType]="'primary'">注册</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="10" *ngIf="index==1">
+        <div nz-col [nzSpan]="9">
+            <!-- 省市级联动top -->
+            <nz-cascader
+                [class.class123]="true"
+                [nzOptions]="_options"
+                [(ngModel)]="_value"
+                (nzChange)="_console($event)"
+                (nzClear)="clear()">
+            </nz-cascader>
+            <a href="javascript:;" (click)="_changeNzOptions()" class="change-options">
+                清空
+            </a>
+            <!-- 省市级联动end -->
+
+            <!-- checkbox  top -->
+            <div style="margin-top:30px;border-bottom: 1px solid rgb(233, 233, 233);">
+                <label nz-checkbox [(ngModel)]="allChecked" 
+                        (ngModelChange)="updateAllChecked()" 
+                        [nzIndeterminate]="indeterminate">
+                    <span>{{selText}}</span>
+                </label>
+                <button nz-button [nzType]="'primary'" [nzSize]="'small'" (click)="getVal()">获取选中数据</button>
+            </div>
+            <br>
+            <nz-checkbox-group style="margin-top:10px" [(ngModel)]="checkOptionsOne" (ngModelChange)="updateSingleChecked()">
+                <!-- checkOptionsOne传递过来的数组，渲染页面checkbox的 -->
+            </nz-checkbox-group>
+            <!-- checkbox  end -->
+        </div>
+        <div nz-col [nzSpan]="6">空</div>
+        <div nz-col [nzSpan]="9">
+            <!-- 日期选择 top -->
+            <nz-datepicker style="width: 40%;" (ngModelChange)="_startDate=$event;_startValueChange()" 
+                [ngModel]="_startDate" 
+                [nzDisabledDate]="_disabledStartDate" 
+                nzShowTime [nzFormat]="'YYYY-MM-DD HH:mm:ss'">
+            </nz-datepicker>
+            <nz-datepicker style="width: 40%;margin-bottom:10px" (ngModelChange)="_endDate=$event;_endValueChange()" 
+                [ngModel]="_endDate" 
+                [nzDisabledDate]="_disabledEndDate" 
+                [nzShowTime]="_endTime" 
+                [nzFormat]="'YYYY-MM-DD HH:mm:ss'">
+            </nz-datepicker>
+            <!-- 日期选择 end -->
+            <!-- 数字输入 top -->
+            
+            <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="100" [nzStep]="1" 
+                             [nzFormatter]="formatterPercent" [nzParser]="parserPercent"
+                             (nzFocus)="onFocus(demoValue)">
+            </nz-input-number>
+            <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="100" [nzStep]="1" [nzFormatter]="formatterDollar" [nzParser]="parserDollar" [nzAllowClear]="true"></nz-input-number>
+            <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="100" [nzStep]="1" [nzFormatter]="formatterInt" [nzParser]="parserInt"></nz-input-number>
+            <!-- 数字输入 end -->
+            <!-- 输入框组合 top -->
+            <div style="margin-top:16px;">
+                <nz-input [(ngModel)]="siteName" (nzBlur)="nzBlur(beforeValue+siteName+afterValue)">
+                <ng-template #addOnBefore>
+                    <nz-select style="width: 80px;" (ngModelChange)="ngChange($event)" [(ngModel)]="beforeValue">
+                        <nz-option [nzLabel]="'http://'" [nzValue]="'http://'"></nz-option>
+                        <nz-option [nzLabel]="'https://'" [nzValue]="'https://'"></nz-option>
+                    </nz-select>
+                </ng-template>
+                <ng-template #addOnAfter>
+                    <nz-select style="width: 70px;" [(ngModel)]="afterValue">
+                        <nz-option [nzLabel]="'.com'" [nzValue]="'.com'"></nz-option>
+                        <nz-option [nzLabel]="'.jp'" [nzValue]="'.jp'"></nz-option>
+                        <nz-option [nzLabel]="'.cn'" [nzValue]="'.cn'"></nz-option>
+                        <nz-option [nzLabel]="'.org'" [nzValue]="'.org'"></nz-option>
+                    </nz-select>
+                </ng-template>
+                </nz-input>
+            </div>
+            <!-- 输入框组合 end -->
+        </div>
+        
+    </div>
+    <div nz-row *ngIf="index==2">
+        <div nz-col [nzSpan]="6">
+            <!-- 星级评分+radio top -->
+            <p>星级评分</p>
+            <nz-rate [(ngModel)]="starValue" nzAllowHalf></nz-rate>
+            <span *ngIf="starValue" class="ant-rate-text">{{starValue}} 星</span>
+            <br>
+            <nz-radio-group [(ngModel)]="radioValue" (click)=radioVal() style="margin-top:10px">
+                <label nz-radio [nzValue]="'A'">
+                    <span>A</span>
+                </label>
+                <label nz-radio [nzValue]="'B'">
+                    <span>B</span>
+                </label>
+                <label nz-radio-button [nzValue]="'C'">
+                    <span>C</span>
+                </label>
+            </nz-radio-group>
+            <!-- 星级评分+radio end -->
+        </div>
+        <div nz-col [nzSpan]="6">
+            <!-- select top -->
+            <nz-select style="width: 120px;" [(ngModel)]="selectedOption" [nzPlaceHolder]="'choose option'" nzAllowClear>
+                <nz-option
+                      *ngFor="let option of options"
+                      [nzLabel]="option.label"
+                      [nzValue]="option"
+                      [nzDisabled]="option.disabled">
+                </nz-option>
+            </nz-select>
+            <!-- select end -->
+            <p>滑动输入条</p>
+            <p>switch 开关</p>
+            <p>timePicker 与datePicker类似</p>
+        </div>
+        <div nz-col [nzSpan]="12">
+            <!-- 穿梭框 top -->
+            <nz-transfer
+                [(nzDataSource)]="list"
+                nzShowSearch
+                [nzFilterOption]="filterOption"
+                (nzSearchChange)="search($event)"
+                (nzSelectChange)="select($event)"
+                (nzChange)="change($event)">
+            </nz-transfer>
+            <!-- 穿梭框 end -->
+        </div>
+    </div>
+</div>
+<div class="steps-action">
+    <button nz-button [nzType]="'default'" (click)="pre()" *ngIf="current > 0">
+        <span>上一步</span>
+    </button>
+    <button nz-button [nzType]="'default'" (click)="next()" *ngIf="current < 2">
+        <span>下一步</span>
+    </button>
+    <button nz-button [nzType]="'primary'" (click)="done()" *ngIf="current === 2">
+        <span>完成</span>
+    </button>
+</div>
